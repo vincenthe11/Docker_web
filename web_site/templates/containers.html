@@ -1,0 +1,77 @@
+{% extends 'base.html'%}
+{% block title %}Show container{% endblock title %}
+{% block showsome %}
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Image</th>
+            <th>Names</th>
+            <th>Status</th>
+            <th>Contral</th>
+        </tr>
+    </thead>
+    <tbody>
+            {% for container in containers %}
+            <tr>
+            <td>{{ container.Id | slice:"4" }}</td>
+            <td>{{ container.Image }}</td>
+            <td>{{ container.Names }}</td>
+            <td>{{ container.Status }}</td>
+            <td>
+                <!--li class="dropdown">
+               <a data-toggle="dropdown" href="#">Contral</a>
+               <ul class="dropdown-menu">
+                   <li><a href="#">Start</a></li>
+                   <li><a href="#">Stop</a></li>
+               </ul-->
+                <div class="btn-group">
+                    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                        Action
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <div class="btn-group btn-group-vertical">
+                            <form method="POST">
+                            <input type="text" name="containerid" value={{container.Id}} style="display:none"/>
+                            <input value="start" name="submit" type="submit" class="btn del" />
+                            <input value="stop" name="submit" type="submit" class="btn del"/>
+                            <input value="restart" name="submit" type="submit" class="btn del"/>
+                            <input value="delete" name="submit" type="submit" class="btn del"/>
+                            </form>
+                        </div>
+                    </ul>
+                </div>
+            </td>
+            </tr>
+            {% endfor %}
+    </tbody>
+{% endblock showsome %}
+    {% block containers %}
+    <li class="active">
+    {% endblock containers %}
+{% block javascript %}
+<script type="javascript">
+    $(document).ready(function(){
+        $(.del).click(function(){
+            var elem = $(this).closest(".del"); 
+            $.confirm({
+                'title': 'Delet Confirmation',
+                'message': 'Are you sure?',
+                'buttons':{
+                    'yes':{
+                      'class': 'blue',
+                      'action': function(){
+                          elem.slideUp();
+                      }
+                    }
+                    'No':{
+                    'class': 'gray',
+                    'action': function(){}
+                    }
+                },
+                });
+            });
+            });
+</script>
+{% endblock javascript%}
