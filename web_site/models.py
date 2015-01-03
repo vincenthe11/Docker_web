@@ -9,6 +9,20 @@ class Images(models.Model):
 
 class Container(models.Model):
     name = models.CharField(max_length=100)
+    conid = models.CharField(max_length=100)
+    image = models.CharField(max_length=100)
+    port = models.CharField(max_length=100)
+
+
+class Hostinfo(models.Model):
+    name = models.CharField(max_length=100)
+    version = models.CharField(max_length=100)
+    ip = models.CharField(max_length=20)
+    memory = models.CharField(max_length=20)
+    islive = models.BooleanField(default=True)
+
+    def __unicode__(self):
+        return self.name
 
 
 class UserProfile(models.Model):
