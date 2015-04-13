@@ -9,9 +9,10 @@ import models
 class HostForm(forms.ModelForm):
     class Meta:
         model = models.Hostinfo
+        exclude = ['version',]
 
 
 class ContainerForm(forms.ModelForm):
     class Meta:
         model = models.Container
-        exclude = ('conid',)
+        exclude = ['conid',]

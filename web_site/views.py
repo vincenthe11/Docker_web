@@ -11,6 +11,8 @@ import os
 
 @login_required
 def index(request):
+    import pdb
+    pdb.set_trace()
     hostip = ''
     errorinfo = ''
     try:
